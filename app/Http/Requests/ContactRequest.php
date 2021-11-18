@@ -28,7 +28,7 @@ class ContactRequest extends FormRequest
             "email" => "required|email" ,
             "telephone" =>"required",
             "message" => "required",
-            "file"=> "required",
+            "file"=> "required|mimes:pdf,doc,docx,odt,txt|max:500",
         ];
     }
 }
