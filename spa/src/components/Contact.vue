@@ -60,16 +60,13 @@
                       ></v-col>
                     </v-row>
                     <v-row>
-                      <v-col
-                        ><v-text-field
-                          dense
-                          v-model="editedItem.file"
-                          label="file"
-                        ></v-text-field
-                      ></v-col>
+                      <v-col>
+                        <v-file-input dense truncate-length="15"  @change="attachment"></v-file-input>
+                        
+                      </v-col>
                     </v-row>
                     <v-row>
-                      <v-col >
+                      <v-col>
                         <v-textarea
                           dense
                           clearable
@@ -96,7 +93,7 @@
           <v-dialog v-model="dialogDelete" max-width="550px">
             <v-card>
               <v-card-title class="text-h5"
-                >Tem certeza de que deseja excluir este item ?</v-card-title
+                >Tem certeza de que deseja excluir este contato ?</v-card-title
               >
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -122,6 +119,7 @@
 import service from "./service";
 export default {
   data: () => ({
+    
     loading_data_table: false,
     dialog: false,
     dialogDelete: false,
@@ -219,17 +217,32 @@ export default {
       if (this.editedIndex > -1) {
         //update
         let indice = this.editedIndex;
-        service.update(this.editedItem).then((response) => {
+        
+        let form = new FormData()
+        for (let [key, value] of Object.entries(this.editedItem)){
+           form.append(key,value)  
+        }
+
+        service.update(form).then((response) => {
           Object.assign(this.desserts[indice], response.data);
         });
       } else {
         //store
-        service.store(this.editedItem).then((response) => {
+        
+        let form = new FormData()
+        for (let [key, value] of Object.entries(this.editedItem)){
+           form.append(key,value)  
+        }
+        
+        service.store(form).then((response) => {
           this.desserts.push(response.data);
         });
       }
       this.close();
     },
+    attachment(file){
+      this.editedItem.file = file
+    }
   },
 };
 </script>

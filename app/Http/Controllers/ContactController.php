@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Contact;
-use Illuminate\Http\Request;
 use App\Http\Requests\ContactRequest;
 
 class ContactController extends Controller
@@ -27,7 +26,9 @@ class ContactController extends Controller
      */
     public function store(ContactRequest $request)
     {
-        $contact = Contact::create($request->all());
+        $file = $request->file->store('file');
+       
+        $contact = Contact::create(array_merge($request->all(),['file'=>$file]));
         return response()->json($contact);
     }
    
