@@ -59,6 +59,7 @@
                     <v-row>
                       <v-col
                         ><v-text-field
+                           v-mask="'(##)#####-####'"
                           dense
                           v-model="editedItem.telephone"
                           label="Telefone"
@@ -145,7 +146,7 @@ export default {
       { align: "start", sortable: false, text: "Nome", value: "name" },
       { text: "Email", value: "email" },
       { text: "Telefone", value: "telephone" },
-      { text: "message", value: "message" },
+      { text: "Menssagem", value: "message" },
       { text: "", value: "actions", sortable: false },
     ],
     desserts: [],
