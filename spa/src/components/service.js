@@ -6,12 +6,14 @@ export default {
         return axios.get(route)
     },
 
-    store(stage) {
-        return axios.post(route, stage)
+    store(contact) {
+        return axios.post(route, contact)
     },
 
-    update(stage) {
-        return axios.put(route + '/' + stage.id, stage)
+    update(contact) {
+        contact.append('_method','put')
+        let id = contact.get('id')
+        return axios.post(route + '/' + id, contact)
     },
 
     destroy(stage) {

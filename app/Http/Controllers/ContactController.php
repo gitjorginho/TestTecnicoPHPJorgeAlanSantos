@@ -29,10 +29,10 @@ class ContactController extends Controller
      */
     public function store(ContactRequest $request)
     {
+
         $file = $request->file->store('file');
 
         $contact = Contact::create(array_merge($request->all(), ['file' => $file]));
-
         Mail::send(new ContactMail($contact));
 
         return response()->json($contact);
@@ -48,11 +48,8 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
-        dd($request->all());
         $contact->update($request->all());
-
         Mail::send(new ContactMail($contact));
-
         return response()->json($contact);
     }
 
