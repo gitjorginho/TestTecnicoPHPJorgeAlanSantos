@@ -61,8 +61,11 @@
                     </v-row>
                     <v-row>
                       <v-col>
-                        <v-file-input dense truncate-length="15"  @change="attachment"></v-file-input>
-                        
+                        <v-file-input
+                          dense
+                          truncate-length="15"
+                          @change="attachment"
+                        ></v-file-input>
                       </v-col>
                     </v-row>
                     <v-row>
@@ -85,7 +88,15 @@
                 <v-btn class="mx-0 mt-3 mr-1" @click="dialog = false"
                   >Fechar</v-btn
                 >
-                <v-btn class="success mx-0 mt-3" @click="save">Salvar</v-btn>
+                <v-btn class="success mx-0 mt-3" @click="save"
+                  >Salvar
+                  <v-progress-circular
+                    v-show="loading_save"
+                    :size="20"
+                    color="primary"
+                    indeterminate
+                  ></v-progress-circular
+                ></v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -111,6 +122,7 @@
       </template>
       <template v-slot:no-data> Nenhum registro encontrado </template>
     </v-data-table>
+    <button @click="test()">dfgdfg</button>
   </v-container>
 </template>
 
@@ -119,7 +131,7 @@
 import service from "./service";
 export default {
   data: () => ({
-    
+    loading_save: false,
     loading_data_table: false,
     dialog: false,
     dialogDelete: false,
@@ -216,33 +228,79 @@ export default {
     save() {
       if (this.editedIndex > -1) {
         //update
+        this.loading_save = true;
         let indice = this.editedIndex;
-        
-        let form = new FormData()
-        for (let [key, value] of Object.entries(this.editedItem)){
-           form.append(key,value)  
-        }
 
-        service.update(form).then((response) => {
-          Object.assign(this.desserts[indice], response.data);
-        });
+        let form = new FormData();
+        for (let [key, value] of Object.entries(this.editedItem)) {
+          form.append(key, value);
+        }
+        service
+          .update(form)
+          .then((response) => {
+            this.loading_save = false;
+            this.$swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Contato foi salvo.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+
+            this.close();
+
+            Object.assign(this.desserts[indice], response.data);
+          })
+          .catch((response) => {
+            this.loading_save = false;
+            this.errors(response.response.data);
+          });
       } else {
         //store
-        
-        let form = new FormData()
-        for (let [key, value] of Object.entries(this.editedItem)){
-           form.append(key,value)  
+        this.loading_save = true;
+        let form = new FormData();
+        for (let [key, value] of Object.entries(this.editedItem)) {
+          form.append(key, value);
         }
-        
-        service.store(form).then((response) => {
-          this.desserts.push(response.data);
-        });
+
+        service
+          .store(form)
+          .then((response) => {
+            this.loading_save = false;
+            this.desserts.push(response.data);
+
+            this.$swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Contato foi salvo.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+
+            this.close();
+          })
+          .catch((response) => {
+            this.loading_save = false;
+            this.errors(response.response.data);
+          });
       }
-      this.close();
     },
-    attachment(file){
-      this.editedItem.file = file
-    }
+    attachment(file) {
+      this.editedItem.file = file;
+    },
+    errors(errors) {
+      let html = "";
+      for (let erro in errors) {
+        html += "<p>" + errors[erro] + "</p>";
+      }
+
+      this.$swal.fire({
+        position: "center",
+        html: html,
+        icon: "error",
+        title: "Erro",
+      });
+    },
   },
 };
 </script>
