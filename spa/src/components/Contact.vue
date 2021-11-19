@@ -6,6 +6,12 @@
       :items="desserts"
       sort-by="corporate_name"
       class="elevation-1"
+      :footer-props="{
+      showFirstLastPage: true,
+      itemsPerPageAllText:'Todos', 
+      itemsPerPageText:'contatos por pagina'
+    }"
+    
     >
       <template v-slot:top>
         <v-toolbar flat>
@@ -101,7 +107,7 @@
             </v-card>
           </v-dialog>
 
-          <v-dialog v-model="dialogDelete" max-width="550px">
+          <v-dialog v-model="dialogDelete" max-width="600px">
             <v-card>
               <v-card-title class="text-h5"
                 >Tem certeza de que deseja excluir este contato ?</v-card-title
@@ -122,7 +128,7 @@
       </template>
       <template v-slot:no-data> Nenhum registro encontrado </template>
     </v-data-table>
-    <button @click="test()">dfgdfg</button>
+    
   </v-container>
 </template>
 
