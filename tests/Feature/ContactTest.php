@@ -8,7 +8,7 @@ use Tests\TestCase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 
-class ExampleTest extends TestCase
+class Contactest extends TestCase
 {
     /**
      * A basic test example.
