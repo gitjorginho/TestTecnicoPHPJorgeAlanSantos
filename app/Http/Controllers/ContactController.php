@@ -48,8 +48,20 @@ class ContactController extends Controller
      */
     public function update(ContactRequest $request, Contact $contact)
     {
-        $contact->update($request->all());
+        if($request->hasFile('file')){
+            $file = $request->file->store('file');
+              $request->merge(['file'=>$file]);
+              $contact->update(array_merge($request->all(),['file'=>$file]));
+        }else{
+            unset($request->file);
+            //dd($request->all());
+            $contact->update($request->all());
+        }
+         
+        
+        
         Mail::send(new ContactMail($contact));
+        
         return response()->json($contact);
     }
 

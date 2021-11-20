@@ -7,11 +7,10 @@
       sort-by="corporate_name"
       class="elevation-1"
       :footer-props="{
-      showFirstLastPage: true,
-      itemsPerPageAllText:'Todos', 
-      itemsPerPageText:'contatos por pagina'
-    }"
-    
+        showFirstLastPage: true,
+        itemsPerPageAllText: 'Todos',
+        itemsPerPageText: 'contatos por pagina',
+      }"
     >
       <template v-slot:top>
         <v-toolbar flat>
@@ -59,7 +58,7 @@
                     <v-row>
                       <v-col
                         ><v-text-field
-                           v-mask="'(##)#####-####'"
+                          v-mask="'(##)#####-####'"
                           dense
                           v-model="editedItem.telephone"
                           label="Telefone"
@@ -72,7 +71,7 @@
                           dense
                           truncate-length="15"
                           @change="attachment"
-                          ref="attach"
+                          :key="clear_attach"
                         ></v-file-input>
                       </v-col>
                     </v-row>
@@ -130,7 +129,6 @@
       </template>
       <template v-slot:no-data> Nenhum registro encontrado </template>
     </v-data-table>
-    
   </v-container>
 </template>
 
@@ -139,6 +137,7 @@
 import service from "./service";
 export default {
   data: () => ({
+    clear_attach: 0,
     loading_save: false,
     loading_data_table: false,
     dialog: false,
@@ -202,7 +201,8 @@ export default {
       this.editedIndex = this.desserts.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
-      this.$refs.attach.value = '';
+      this.clear_attach++;
+      delete this.editedItem.file;
     },
 
     deleteItem(item) {
@@ -296,7 +296,6 @@ export default {
     },
     attachment(file) {
       this.editedItem.file = file;
-      
     },
     errors(errors) {
       let html = "";
