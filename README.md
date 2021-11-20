@@ -1,40 +1,58 @@
-1 composer install
+1. - git clone git@github.com:gitjorginho/TestTecnicoPHPJorgeAlanSantos.git agenda
 
-2- copie o araquivo .env.example e renomei para .env
+1. - cd agenda
 
-3- no terminal execute `php artisan key:generate `
+1. composer install
 
-3- cria uma base de dados chamada laravel
+4- copie o araquivo .env.example e renomei para .env
 
-4- no arquivo env configure o banco
+5- no terminal execute `php artisan key:generate `
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=laravel
-DB_USERNAME=root
-DB_PASSWORD=
+6- cria uma base de dados chamada laravel
 
-5- no terminal execute `php artisan migrate`
+7- no arquivo env configure o banco
 
-6- no terminal execute `php artisan db:seed` 
+DB\_CONNECTION=mysql
 
-7- cofigura no arquivo .env com os dados de smtp
+DB\_HOST=127.0.0.1
 
-MAIL_MAILER=smtp
-MAIL_HOST=smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
-MAIL_ENCRYPTION=null
-MAIL_FROM_ADDRESS=null
-MAIL_FROM_NAME="${APP_NAME}"
+DB\_PORT=3306
+
+DB\_DATABASE=laravel
+
+DB\_USERNAME=root
+
+DB\_PASSWORD=
+
+8- no terminal execute `php artisan migrate`
+
+9- no terminal execute `php artisan db:seed`
+
+10- cofigura no arquivo .env com os dados de smtp
+
+MAIL\_MAILER=smtp
+
+MAIL\_HOST=smtp.mailtrap.io
+
+MAIL\_PORT=2525
+
+MAIL\_USERNAME=null
+
+MAIL\_PASSWORD=null
+
+MAIL\_ENCRYPTION=null
+
+MAIL\_FROM\_ADDRESS=null
+
+MAIL\_FROM\_NAME="${APP\_NAME}"
 
 EMAIL=     #email que vai receber os contatos
 
-8- no terminal execute `php artisan serve` 
+11- no terminal execute `php artisan serve`
 
-9- entra na pasta spa  `cd spa`
+12- em outro instacia do terminal
+
+9- entra na pasta spa  `cd agenda\spa`
 
 10- no terminal execute `npm i`
 
@@ -43,11 +61,12 @@ EMAIL=     #email que vai receber os contatos
 Pronto provavelmente o servidor abrirar em http://localhost:8080/
 
 
-Para realizar os testes unitarios 
-1 - no terminal execute `php artisan test` 
+Para realizar os testes unitarios
+
+1. - no terminal execute `php artisan test`
 
 
-Observacao: no arquivo agenda/spa/axios.js  configura o dominio do servidor
+Observacao: no arquivo agenda\spa\axios.js  configura o dominio do servidor
 
 axios.defaults.baseURL = 'http://localhost:8000/api/'   # COLOCA O DOMINIO DO SERVIDOR PHP
- 
+
