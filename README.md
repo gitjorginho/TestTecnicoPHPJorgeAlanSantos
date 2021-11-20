@@ -12,17 +12,17 @@
 
 7- no arquivo env configure o banco
 
-DB\_CONNECTION=mysql
+    DB\_CONNECTION=mysql
 
-DB\_HOST=127.0.0.1
+    DB\_HOST=127.0.0.1
 
-DB\_PORT=3306
+    DB\_PORT=3306
 
-DB\_DATABASE=laravel
+    DB\_DATABASE=laravel
 
-DB\_USERNAME=root
+    DB\_USERNAME=root
 
-DB\_PASSWORD=
+    DB\_PASSWORD=
 
 8- no terminal execute `php artisan migrate`
 
@@ -30,23 +30,23 @@ DB\_PASSWORD=
 
 10- cofigura no arquivo .env com os dados de smtp
 
-MAIL\_MAILER=smtp
+    MAIL\_MAILER=smtp
 
-MAIL\_HOST=smtp.mailtrap.io
+    MAIL\_HOST=smtp.mailtrap.io
 
-MAIL\_PORT=2525
+    MAIL\_PORT=2525
 
-MAIL\_USERNAME=null
+    MAIL\_USERNAME=null
 
-MAIL\_PASSWORD=null
+    MAIL\_PASSWORD=null
 
-MAIL\_ENCRYPTION=null
+    MAIL\_ENCRYPTION=null
 
-MAIL\_FROM\_ADDRESS=null
+    MAIL\_FROM\_ADDRESS=null
 
-MAIL\_FROM\_NAME="${APP\_NAME}"
+    MAIL\_FROM\_NAME="${APP\_NAME}"
 
-EMAIL=     #email que vai receber os contatos
+    EMAIL=     #email que vai receber os contatos
 
 11- no terminal execute `php artisan serve`
 
@@ -66,9 +66,9 @@ Para realizar os testes unitarios
 1. - no terminal execute `php artisan test`
 
 
-*Se o dominio do servidor for diferente
+*Se o dominio do servidor for diferente de  http://127.0.0.1:8000
 
-Observacao: no arquivo agenda\spa\axios.js  configura o dominio do servidor
+Observacao: no arquivo agenda\spa\vue.config.js.js  configura o dominio do servidor
 
-axios.defaults.baseURL = 'http://localhost:8000/api/'   # COLOCA O DOMINIO DO SERVIDOR PHP
+proxy: 'http://127.0.0.1:8000'   # COLOCA O DOMINIO DO SERVIDOR PHP
 
