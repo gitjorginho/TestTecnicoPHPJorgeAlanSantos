@@ -16,7 +16,7 @@ class ContactSeeder extends Seeder
         DB::table('contacts')->insert([
             "name" => "Jorge",
             "email" => "jorgeallan@msn.com",
-            "telephone" => "(71)985067620",
+            "telephone" => "(71)98506-7620",
             "message" => "Testando aplicativo",
             "file" => "file/YlnNaAwqonPbUElvlVxoaC78QQoH5YpMy9GioZjR.jpg"
         ]);

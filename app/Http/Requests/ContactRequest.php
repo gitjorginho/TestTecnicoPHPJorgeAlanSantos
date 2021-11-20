@@ -23,6 +23,17 @@ class ContactRequest extends FormRequest
      */
     public function rules()
     {
+        
+        if($this->route()->methods[0] == 'PUT' || $this->route()->methods[0] == 'PATCH'){
+            return [
+                "name" => "required|max:70",
+                "email" => "required|email" ,
+                "telephone" =>['required','regex:/^\(\d{2}\)\d{4,5}-\d{4}$/'],
+                "message" => "required",
+                "file"=> "mimes:pdf,doc,docx,odt,txt|max:500",
+            ];    
+        }
+
         return [
             "name" => "required|max:70",
             "email" => "required|email" ,

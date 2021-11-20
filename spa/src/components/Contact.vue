@@ -72,6 +72,7 @@
                           dense
                           truncate-length="15"
                           @change="attachment"
+                          ref="attach"
                         ></v-file-input>
                       </v-col>
                     </v-row>
@@ -201,6 +202,7 @@ export default {
       this.editedIndex = this.desserts.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
+      this.$refs.attach.value = '';
     },
 
     deleteItem(item) {
@@ -294,6 +296,7 @@ export default {
     },
     attachment(file) {
       this.editedItem.file = file;
+      
     },
     errors(errors) {
       let html = "";
