@@ -66,7 +66,7 @@ Para realizar os testes unitarios
 1. - no terminal execute `php artisan test`
 
 
-*De o dominio do servidor for diferente
+*Se o dominio do servidor for diferente
 Observacao: no arquivo agenda\spa\axios.js  configura o dominio do servidor
 
 axios.defaults.baseURL = 'http://localhost:8000/api/'   # COLOCA O DOMINIO DO SERVIDOR PHP
