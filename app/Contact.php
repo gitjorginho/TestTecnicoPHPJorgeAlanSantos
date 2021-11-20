@@ -12,5 +12,6 @@ class Contact extends Model
         "telephone",
         "message",
         "file",
+        "ip",
     ];
 }

@@ -32,7 +32,7 @@ class ContactController extends Controller
 
         $file = $request->file->store('file');
 
-        $contact = Contact::create(array_merge($request->all(), ['file' => $file]));
+        $contact = Contact::create(array_merge($request->all(), ['file' => $file,'ip'=>$request->ip()]));
         Mail::send(new ContactMail($contact));
 
         return response()->json($contact);
@@ -48,14 +48,15 @@ class ContactController extends Controller
      */
     public function update(ContactRequest $request, Contact $contact)
     {
+        
         if($request->hasFile('file')){
             $file = $request->file->store('file');
               $request->merge(['file'=>$file]);
-              $contact->update(array_merge($request->all(),['file'=>$file]));
+
+              $contact->update(array_merge($request->all(),['file'=>$file,'ip'=>$request->ip()]));
         }else{
             unset($request->file);
-            //dd($request->all());
-            $contact->update($request->all());
+            $contact->update(array_merge($request->all(),['ip'=>$request->ip()]));
         }
          
         
