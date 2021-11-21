@@ -171,7 +171,11 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "Novo Contato" : "Atualizar Contato";
+      if (this.editedIndex === -1) {
+         return "Novo Contato";
+      } else {
+        return "Atualizar Contato";
+      }
     },
   },
 
@@ -235,6 +239,7 @@ export default {
       });
     },
     save() {
+      
       if (this.editedIndex > -1) {
         //update
         this.loading_save = true;
@@ -247,7 +252,8 @@ export default {
         service
           .update(form)
           .then((response) => {
-            this.loading_save = false;
+            this.loading_save = false
+            this.clear_attach++  
             this.$swal.fire({
               position: "top-end",
               icon: "success",
@@ -275,7 +281,8 @@ export default {
         service
           .store(form)
           .then((response) => {
-            this.loading_save = false;
+            this.loading_save = false
+            this.clear_attach++  
             this.desserts.push(response.data);
 
             this.$swal.fire({

@@ -18,6 +18,7 @@ class ContactSeeder extends Seeder
             "email" => "jorgeallan@msn.com",
             "telephone" => "(71)98506-7620",
             "message" => "Testando aplicativo",
+            "ip" => "127.0.0.1",
             "file" => "file/YlnNaAwqonPbUElvlVxoaC78QQoH5YpMy9GioZjR.jpg"
         ]);
     }
