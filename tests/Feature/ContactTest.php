@@ -26,7 +26,7 @@ class Contactest extends TestCase
                 "email",
                 "telephone",
                 "message",
-                "file"
+                
             ]
         ]);
     }
@@ -96,7 +96,7 @@ class Contactest extends TestCase
         $contact_id = $contacts[$contact]->id;
         
         DB::beginTransaction();     
-        $response = $this->delete('/api/contact/'.$contact);
+        $response = $this->delete('/api/contact/'.$contact_id);
         $response->assertOk();
         $response->assertJsonStructure([
             "id",
